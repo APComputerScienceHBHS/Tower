@@ -2,11 +2,7 @@ package Tristaniel;
 
 public class Tower {
 
-	private int disks;
-	
-	private int pole1;
-	private int pole2;
-	private int pole3;
+	private int disks, pole1, pole2, pole3, step;
 	
 	public Tower(int disks) {
 		this.disks = disks;
@@ -44,7 +40,8 @@ public class Tower {
 	}
 
 	private void moveOneDisk(int start, int end) {
-		System.out.println("Move one disk from " + start + " to " + end);
+		step++;
+		System.out.println("Step " + step + ": Move one disk from " + start + " to " + end);
 	}
 	
 	/** @return array equal to the three pegs */
