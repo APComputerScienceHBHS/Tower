@@ -2,8 +2,12 @@ package Tristaniel;
 
 public class towerRenderer {
 	
+	public static Tower meme;
+	public static towerMemory boi;
+	
 	public static void main(String[] args){
-		Tower tow1 = new Tower(5);
-		tow1.solve();
+		meme = new Tower(5);
+		boi = new towerMemory(meme);
+		meme.solve();
 	}
 }

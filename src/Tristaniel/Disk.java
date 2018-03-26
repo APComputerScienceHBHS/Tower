@@ -2,38 +2,51 @@ package Tristaniel;
 
 public class Disk {
 
-	public int size;
+	private int size;
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
 
 	public Disk(int size) {
 		this.size = size;
 	}
+	
+	public String runner() {
+		int run = size;
+		return stringOut(run);
+	}
 
-	public String stringOut() {
-		String out = " ";
+	private String stringOut(int size) {
+		String out = "     ";
 
-		if (size == 0) {
-			out = "   -=-   ";
-		}
-		else if (size == 1) {
-			out = "  -==-   ";
+		if (size == 1) {
+			out = " -1- ";
 		}
 		else if (size == 2) {
-			out = "  -===-  ";
+			out = " -2- ";
 		}
 		else if (size == 3) {
-			out = " -====-  ";
+			out = " -3- ";
 		}
 		else if (size == 4) {
-			out = " -=====- ";
+			out = " -4- ";
 		}
 		else if (size == 5) {
-			out = "-======- ";
+			out = " -5- ";
 		}
 		else if (size == 6) {
-			out = "-=======-";
+			out = " -6- ";
+		}
+		else if (size == 7) {
+			out = " -7- ";
 		}
 		else {
-			out = "         ";
+			out = "     ";
 		}
 
 		return out;
