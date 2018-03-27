@@ -2,7 +2,8 @@ package Tristaniel;
 
 public class Tower {
 
-	private int disks, step, steps, first, second, third;
+	public int disks;
+	private int step;
 	private int[] pole1, pole2, pole3;
 	private int[][] status;
 
@@ -13,10 +14,9 @@ public class Tower {
 	/** Solves tower based on input */
 	public void solve() {
 		int temp = disks;
-
-		pole1 = new int[7];
-		pole2 = new int[7];
-		pole3 = new int[7];
+		pole1 = new int[25];
+		pole2 = new int[25];
+		pole3 = new int[25];
 
 		/* Sets up first pole */
 		for (int n = 0; n < pole1.length; n++) {
@@ -25,11 +25,14 @@ public class Tower {
 		}
 
 		/* Checks for disk amount validity */
-		if (isValid(disks) == true){
+		if (isValid(disks) == true) {
+			System.out.println("Step " + step + ": Starting point");
+			System.out.println(size(pole1) + " " + size(pole2) + " " + size(pole3));
+			towerRenderer.boi.run();
 			moveTower(disks, "1", "3", "2");
 		}
 		else {
-			System.out.println("Tower count invalid! Must be within range 1-7 disks.");
+			System.out.println("Tower count invalid! Must be within range 1-25 disks.");
 			System.out.println("You gave " + disks + ".");
 		}
 	}
@@ -37,7 +40,7 @@ public class Tower {
 	/** @return boolean if valid input */
 	private boolean isValid(int disks) {
 		boolean valid = false;
-		if (1 <= disks && disks <= 7) {
+		if (1 <= disks && disks <= 24) {
 			valid = true;
 		}
 		return valid;
@@ -62,6 +65,7 @@ public class Tower {
 
 	private void moveOneDisk(String string, String string2) {
 		step++;
+
 		System.out.println("Step " + step + ": Move one disk from " + string + " to " + string2);
 
 		/* Swaps around disks */
@@ -69,6 +73,24 @@ public class Tower {
 		status[poleNum(string)][topDisk(string)] = 0;
 
 		System.out.println(size(pole1) + " " + size(pole2) + " " + size(pole3));
+		if (string.equals("1") && string2.equals("2")) {
+			System.out.println(" >>>>>                  ");
+		}
+		else if (string.equals("1") && string2.equals("3")) {
+			System.out.println(" >>>>>   >>>>>>         ");
+		}
+		else if (string.equals("2") && string2.equals("1")) {
+			System.out.println("         <<<<<<         ");
+		}
+		else if (string.equals("2") && string2.equals("3")) {
+			System.out.println("         >>>>>>         ");
+		}
+		else if (string.equals("3") && string2.equals("1")) {
+			System.out.println("         <<<<<<   <<<<< ");
+		}
+		else if (string.equals("3") && string2.equals("2")) {
+			System.out.println("                  <<<<< ");
+		}
 		towerRenderer.boi.run();
 	}
 
@@ -85,13 +107,13 @@ public class Tower {
 		else if (string.equals("3")) {
 			poleNum = 3;
 		}
-		
+
 		return poleNum;
 	}
 
 	/** @return topDisk array value of the top disk  */
 	private int topDisk(String poleStr) {
-		int topDisk = 6;
+		int topDisk = disks;
 		boolean firstPass = true;
 
 		if (poleStr.equals("1")) {
@@ -125,7 +147,7 @@ public class Tower {
 	/** @return size number of values above 0 in the "pole" */
 	private int size(int[] pole) {
 		int size = 0;
-		for (int n = 0; n < pole.length - 1; n++) {
+		for (int n = 0; n < disks; n++) {
 			if (pole[n] != 0) {
 				size++;
 			}
