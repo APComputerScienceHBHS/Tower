@@ -6,8 +6,8 @@ public class towerRenderer {
 	public static towerMemory boi;
 	
 	public static void main(String[] args){
-		meme = new Tower(10);
+		meme = new Tower(14);
 		boi = new towerMemory(meme);
-		meme.solve();
+		meme.solveTime(500);
 	}
 }

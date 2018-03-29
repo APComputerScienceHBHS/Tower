@@ -3,7 +3,7 @@ package Tristaniel;
 public class Tower {
 
 	public int disks;
-	private int step;
+	private int step, timeout;
 	private int[] pole1, pole2, pole3;
 	private int[][] status;
 
@@ -14,9 +14,36 @@ public class Tower {
 	/** Solves tower based on input */
 	public void solve() {
 		int temp = disks;
-		pole1 = new int[25];
-		pole2 = new int[25];
-		pole3 = new int[25];
+		pole1 = new int[65];
+		pole2 = new int[65];
+		pole3 = new int[65];
+
+		/* Sets up first pole */
+		for (int n = 0; n < pole1.length; n++) {
+			pole1[n] = temp;
+			temp--;
+		}
+
+		/* Checks for disk amount validity */
+		if (isValid(disks) == true) {
+			System.out.println("Step " + step + ": Starting point");
+			System.out.println(size(pole1) + " " + size(pole2) + " " + size(pole3));
+			towerRenderer.boi.run();
+			moveTower(disks, "1", "3", "2");
+		}
+		else {
+			System.out.println("Tower count invalid! Must be within range 1-25 disks.");
+			System.out.println("You gave " + disks + ".");
+		}
+	}
+	
+	public void solveTime(int timeout) {
+		this.timeout = timeout;
+		
+		int temp = disks;
+		pole1 = new int[65];
+		pole2 = new int[65];
+		pole3 = new int[65];
 
 		/* Sets up first pole */
 		for (int n = 0; n < pole1.length; n++) {
@@ -40,7 +67,7 @@ public class Tower {
 	/** @return boolean if valid input */
 	private boolean isValid(int disks) {
 		boolean valid = false;
-		if (1 <= disks && disks <= 24) {
+		if (1 <= disks && disks <= 64) {
 			valid = true;
 		}
 		return valid;
@@ -65,7 +92,14 @@ public class Tower {
 
 	private void moveOneDisk(String string, String string2) {
 		step++;
-
+		
+		try {
+			Thread.sleep(timeout);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("Step " + step + ": Move one disk from " + string + " to " + string2);
 
 		/* Swaps around disks */
